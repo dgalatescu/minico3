@@ -1,0 +1,42 @@
+minico_silver_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: MinicoSilverBundle:Default:index }
+category:
+    resource: "@MinicoSilverBundle/Resources/config/category/routing.yml"
+suppliers:
+    resource: "@MinicoSilverBundle/Resources/config/suppliers/routing.yml"
+entries:
+    resource: "@MinicoSilverBundle/Resources/config/entries/routing.yml"
+withdrawls:
+    resource: "@MinicoSilverBundle/Resources/config/withdrawls/routing.yml"
+products:
+    resource: "@MinicoSilverBundle/Resources/config/products/routing.yml"
+sales:
+    resource: "@MinicoSilverBundle/Resources/config/sales/routing.yml"
+storage:
+    resource: "@MinicoSilverBundle/Resources/config/storage/routing.yml"
+trasfer:
+    resource: "@MinicoSilverBundle/Resources/config/transfer/routing.yml"
+minico_silver_report:
+    pattern:  /report
+    defaults: { _controller: MinicoSilverBundle:Report:index }
+minico_silver_supplier_report:
+    pattern:  /report/supplier
+    defaults: { _controller: MinicoSilverBundle:Report:supplierReport }
+minico_silver_product_code_sales:
+    pattern:  /report/product-code-sales
+    defaults: { _controller: MinicoSilverBundle:Report:productCodeSalesReport }
+minico_silver_product_code:
+    pattern:  /report/product-code-report
+    defaults: { _controller: MinicoSilverBundle:Report:productCodeReport }
+post_results:
+    pattern:  /results
+    defaults: { _controller: MinicoSilverBundle:Categoty:indexResults }
+post_bulk_delete:
+    pattern:  /bulk/delete
+    defaults: { _controller: MinicoSilverBundle:Categoty:bulkDelete }
+    requirements: { _method: post }
+post_bulk_disable:
+    pattern:  /bulk/disable
+    defaults: { _controller: MinicoSilverBundle:Categoty:bulkDisable }
+    requirements: { _method: post }

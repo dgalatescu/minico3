@@ -1,0 +1,140 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/addnew.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/jpegcamera/webcam.js') }}"></script>
+    <!-- Configure a few settings -->
+    <script language="JavaScript">
+        routejpg = Routing.generate('photo_test'),
+        webcam.set_api_url( routejpg );
+        webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+        webcam.set_shutter_sound( true ); // play shutter click sound
+    </script>
+
+    <!-- Next, write the movie to the page at 320x240 -->
+    <script language="JavaScript">
+        $(function(){
+            $("#cam").html(webcam.get_html(320, 240));
+        });
+    </script>
+
+    <!-- Code to handle the server response (see test.php) -->
+    <script language="JavaScript">
+        webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+        function take_snapshot() {
+            // take snapshot and upload to server
+            document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
+            webcam.snap();
+        }
+
+        function my_completion_handler(msg) {
+            // extract URL out of PHP output
+            if (msg.match(/(http\:\/\/\S+)/)) {
+                var image_url = RegExp.$1;
+                // show JPEG image in page
+                document.getElementById('upload_results').innerHTML =
+                        '<h1>Upload Successful!</h1>' +
+                                '<h3>JPEG URL: ' + image_url + '</h3>' +
+                                '<img src="' + image_url + '">';
+
+                // reset camera for another shot
+                webcam.reset();
+            }
+            else alert("PHP Error: " + msg);
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h1>Introduceti informatiile pentru noul produs: </h1>
+    <table>
+        <tr>
+            <td style="vertical-align: middle; width: 300px;">
+                <div id="mainBlock">
+                    <table>
+                        <tr>
+                            <td>Date:</td>
+                            <td><input type="text" id="datepicker" value="{{ "now"|date("Y-m-d") }}"></td>
+                        </tr>
+                        <tr>
+                            <td>Pret intrare:</td>
+                            <td><input type="text" class="sale" name="entryPrice" id="entryPrice" /></td>
+                        </tr>
+                        <tr>
+                            <td>Distribuitor:</td>
+                            <td>
+                                <select name="supplierId" id="supplierId">
+                                    <option value="-1">selectati</option>
+                                    {% for supplier in suppliers %}
+                                        <option value="{{ supplier.id }}" code="{{ supplier.code }}">{{ supplier.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cod:</td>
+                            <td><input type="text" class="sale" name="productCode" id="productCode" /></td>
+                        </tr>
+                        <tr>
+                            <td>Descriere:</td>
+                            <td><input type="text" class="sale" name="description" id="description" /></td>
+                        </tr>
+                        <tr>
+                            <form>
+                                <td><input type=button value="Configure..." onClick="webcam.configure()"></td>
+                                <td><input type=button value="Take Snapshot" onClick="take_snapshot()"></td>
+                            </form>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><div id="upload_results" style="background-color:#eee;"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Categorie:</td>
+                            <td>
+                                <select name="categoryId" id="categoryId">
+                                    <option value="">selectati</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Margine:</td>
+                            <td>
+                                <select id="margin">
+                                    <option value="">selectati</option>
+                                    {% for margin, marginValue in margins %}
+                                        <option value="{{ marginValue }}">{{ marginValue }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pret vanzare:</td>
+                            <td><input type="text" class="sale" name="salePrice" id="salePrice" /></td>
+                        </tr>
+                        <tr>
+                            <td>Catitate:</td>
+                            <td><input type="text" class="entries" name="quantity" id="quantity" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp</td>
+                            <td>
+                                <button save="saveInfoToDatabase" class="save" id="save">Save</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span id="result"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="vertical-align: middle; text-align: center; width: 300px;">
+                <div id="cam"></div>
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}

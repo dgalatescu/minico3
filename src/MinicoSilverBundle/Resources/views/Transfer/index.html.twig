@@ -1,0 +1,60 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Transfer list</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('transfer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Creationdate</th>
+                <th>Storage from</th>
+                <th>Storage to</th>
+                {#<th>Modified</th>#}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('transfer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.product }}</td>
+                <td>{{ entity.qty }}</td>
+                <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d') }}{% endif %}</td>
+                {#<td>{% if entity.modified %}{{ entity.modified|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                <td>{{ entity.fromStorage }}</td>
+                <td>{{ entity.toStorage }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('transfer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('transfer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('transfer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

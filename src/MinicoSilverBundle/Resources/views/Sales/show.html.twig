@@ -1,0 +1,56 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Sales</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Product code</th>
+                <td>{{ entity.getProductId }}</td>
+            </tr>
+            <tr>
+                <th>Product name</th>
+                <td>{{ entity.getProductId.getProductDescription }}</td>
+            </tr>
+            <tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ entity.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Magazin vanzare</th>
+                <td>{{ entity.fromStorage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('sales_new', { 'id': entity.id }) }}">
+                Add a new sale
+            </a>
+        </li>
+        <br/>
+        <li>
+            <a href="{{ path('sales') }}">
+                Back to the list
+            </a>
+        </li>
+        <br/>
+        <li>
+            <a href="{{ path('sales_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

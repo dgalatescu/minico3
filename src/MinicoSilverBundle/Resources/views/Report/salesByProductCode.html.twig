@@ -1,0 +1,83 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    {% include 'MinicoSilverBundle:Report:meniu.html.twig' %}
+    <br/>
+    {{ form(form) }}
+    <br/>
+    <h2 align="center">{{ message }}</h2>
+    {% if sumPerCodeAndShop|length > 0 %}
+
+        <table width="300px">
+            <tr>
+                <th>Magazin</th>
+                <th>Suma totala (intrari fara TVA)</th>
+            </tr>
+            {% for shop, supplierArray in totalSalesShop %}
+                {% for supplier, sum in supplierArray %}
+                    <tr align="center">
+                        <td>
+                            {{ shop }} - {{ supplier }}
+                        </td>
+                        <td>
+                            {{ sum }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+        <table width="300px">
+            {% for code,codeArray in sumPerCodeAndShop %}
+                <tr align="center">
+                    <th colspan="2">
+                        {{ code }}
+                    </th>
+                </tr>
+                {% for shop, val in codeArray %}
+                    <tr align="center">
+                        <td>
+                            {{ shop }}
+                        </td>
+                        <td>
+                            {{ val }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr align="center">
+                    <td colspan="2">
+                        {# $productsArray[$code][$shop][] #}
+                        {% for code2, shopArray in productsArray %}
+                            {% if code2 == code %}
+                                {% for shop, products in shopArray %}
+                                    <table>
+                                        <tr>
+                                            <th colspan="3">{{ shop }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Cod produs</th>
+                                            <th>Categorie produs</th>
+                                            <th>Valoare intrare(fara TVA)</th>
+                                        </tr>
+                                        {% set sum = 0 %}
+                                        {% for product in products %}
+                                            <tr>
+                                                <td>{{ product.productCode }}</td>
+                                                <td>{{ product.category }}</td>
+                                                <td>{{ product.entryPrice }}</td>
+                                            </tr>
+                                            {% set sum = sum + product.entryPrice %}
+                                        {% endfor %}
+                                        <tr align="right">
+                                            <th colspan="3">Total(intrare fara TVA): {{ sum }}</th>
+                                        </tr>
+                                    </table>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

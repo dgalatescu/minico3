@@ -1,0 +1,25 @@
+transfer:
+    pattern: /transfer
+    defaults: { _controller: MinicoSilverBundle:Transfer:index }
+transfer_new:
+    pattern: /transfer/new
+    defaults: { _controller: MinicoSilverBundle:Transfer:new }
+transfer_create:
+    pattern: /transfer/create
+    defaults: { _controller: MinicoSilverBundle:Transfer:create }
+transfer_show:
+    pattern: /transfer/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Transfer:show }
+    requirements: { _method: get }
+transfer_delete:
+    pattern: /transfer/delete/{id}
+    defaults: { _controller: MinicoSilverBundle:Transfer:delete }
+    requirements: { _method: delete }
+transfer_edit:
+    pattern: /transfer/edit/{id}
+    defaults: { _controller: MinicoSilverBundle:Transfer:edit }
+    requirements: { _method: get }
+transfer_update:
+    pattern: /transfer/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Transfer:update }
+    requirements: { _method: put }

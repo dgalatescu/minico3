@@ -1,0 +1,46 @@
+sales:
+    pattern: /sales
+    defaults: { _controller: MinicoSilverBundle:Sales:index }
+sales_new:
+    pattern: /sales/new
+    defaults: { _controller: MinicoSilverBundle:Sales:new }
+sales_create:
+    pattern: /sales/create
+    defaults: { _controller: MinicoSilverBundle:Sales:create }
+sales_show:
+    pattern: /sales/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Sales:show }
+    requirements: { _method: get }
+sales_delete:
+    pattern: /sales/delete/{id}
+    defaults: { _controller: MinicoSilverBundle:Sales:delete }
+    requirements: { _method: delete }
+sales_edit:
+    pattern: /sales/edit/{id}
+    defaults: { _controller: MinicoSilverBundle:Sales:edit }
+    requirements: { _method: get }
+sales_update:
+    pattern: /sales/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Sales:update }
+    requirements: { _method: put }
+sales_search_by_pn:
+    pattern: /sales/search-by-pn
+    defaults: { _controller: MinicoSilverBundle:Sales:searchByPn }
+sales_filter_search_by_pn:
+    pattern: /sales/filter-search-by-pn
+    defaults: { _controller: MinicoSilverBundle:Sales:filterSearchByPn }
+    requirements: { _method: post }
+    options:
+        expose: true
+sales_save_sales_withdraws_entries:
+    pattern: /sales/save-info
+    defaults: { _controller: MinicoSilverBundle:Sales:saveSalesWithdrawsEntries }
+    requirements: { _method: post }
+    options:
+        expose: true
+sales_get_selling_items:
+    pattern: /sales/selling-items
+    defaults: { _controller: MinicoSilverBundle:Sales:sellingItems }
+    requirements: { _method: post }
+    options:
+        expose: true

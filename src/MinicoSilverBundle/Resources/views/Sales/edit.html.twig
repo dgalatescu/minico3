@@ -1,0 +1,16 @@
+{% extends 'MinicoSilverBundle:Sales:index.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Sales edit</h1>
+
+    {{ form(edit_form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('sales') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

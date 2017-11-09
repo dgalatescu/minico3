@@ -1,0 +1,111 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.dataTables.min.css">
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.0/js/buttons.flash.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.0/js/buttons.html5.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.0/js/buttons.print.min.js" ></script>
+    <script type="text/javascript" language="javascript" class="init"> 
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                "pageLength": 50,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'pdf', 'print'
+                ]
+            } );
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    {% include 'MinicoSilverBundle:Report:meniu.html.twig' %}
+    <br/>
+    <div align="left">
+        <h2>Raport stoc per gestiune</h2>
+        {{ form(form) }}
+    </div>
+    
+    {% if products|length > 0 %}
+        <div class="container">
+		<section>
+                    <table width="100%" id="example" class="display" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Cod produs</th>
+                                <th>Furnizor</th>
+                                <th>Categorie</th>
+                                <th>Cant stoc</th>
+                                <th>Pret intrare</th>
+                                <th>Total intrare</th>
+                                <th>Pret vanzare</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Cod produs</th>
+                                <th>Furnizor</th>
+                                <th>Categorie</th>
+                                <th>Cant stoc</th>
+                                <th>Pret intrare</th>
+                                <th>Total intrare</th>
+                                <th>Pret vanzare</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {#{% for key,product in products %}#}
+                            {% set totalEntry = 0 %}
+                            {% set totalQty = 0 %}
+                            {% for productArray in products %}
+                                {% if (productArray.qty != 0 and suppliers is empty) or
+                                        ( productArray.qty != 0 and suppliers is not empty and productArray.product.supplier.id in suppliers) %}
+                                    {% set totalEntryLine = productArray.product.entryPrice * productArray.qty  %}
+                                    {% set totalEntry = totalEntry + totalEntryLine %}
+                                    {% set totalQty = totalQty + productArray.qty %}
+                                    <tr>
+                                        <td>
+                                            {{ productArray.product.productCode }}
+                                        </td>
+                                        <td>
+                                            {{ productArray.product.supplier }}
+                                        </td>
+                                        <td>
+                                            {{ productArray.product.category }}
+                                        </td>
+                                        <td>
+                                            {{ productArray.qty }}
+                                        </td>
+                                        <td>
+                                            {{ productArray.product.entryPrice }}
+                                        </td>
+                                        <td>
+                                            {{ totalEntryLine }}
+                                        </td>
+                                        <td>
+                                            {#{% if productArray.product.productDescription != '' %}#}
+                                                {#{{ productArray.product.productDescription }}#}
+                                                {#<br/>#}
+                                            {#{% endif %}#}
+                                            {{ productArray.product.salePrice }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>	
+                </section>
+	</div>
+        <div align="center">
+            <h3>Cantitate totala: {{ totalQty }}</h3>
+            <h3>Valoare totala: {{ totalEntry }}</h3>
+        </div>
+    {% endif %}
+{% endblock %}

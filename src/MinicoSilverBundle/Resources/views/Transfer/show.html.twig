@@ -1,0 +1,46 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Transfer</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Product</th>
+                <td>{{ entity.product }}</td>
+            </tr>
+            <tr>
+                <th>Qty</th>
+                <td>{{ entity.qty }}</td>
+            </tr>
+            <tr>
+                <th>From storage</th>
+                <td>{{ entity.fromStorage }}</td>
+            </tr>
+            <tr>
+                <th>To storage</th>
+                <td>{{ entity.toStorage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('transfer') }}">
+            Back to the list
+        </a>
+    </li>
+    <br/>
+    <li>
+        <a href="{{ path('transfer_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+    <li>
+        <a href="{{ path('transfer_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endblock %}

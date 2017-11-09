@@ -1,0 +1,40 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery.calculator.css') }}">
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.plugin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.calculator.js') }}"></script>
+    <script>
+        $(function () {
+            $.calculator.setDefaults({showOn: 'button', buttonImageOnly: true, buttonImage: "{{asset('bundles/minicosilver/images/calculator.png')}}" });
+            $('#minico_silverbundle_products_salePrice').calculator();
+        });
+    </script>
+{% endblock %}
+
+{% block body -%}{{  parent() }}
+    <h1>Products creation</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.productCode) }}
+    {{ form_row(form.productDescription) }}
+    {{ form_row(form.entryPrice) }}
+    {{ form_row(form.salePrice) }}
+    {{ form_row(form.supplier) }}
+    {{ form_row(form.category) }}
+
+    {{ form_row(form.submit, { 'label': 'Adauga produs' }) }}
+    {{ form_end(form) }}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('products') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

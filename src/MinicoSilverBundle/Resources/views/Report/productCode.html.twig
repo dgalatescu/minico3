@@ -1,0 +1,59 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    {% include 'MinicoSilverBundle:Report:meniu.html.twig' %}
+    <br/>
+    {{ form(form) }}
+    <br/>
+    <h2 align="center">{{ message }}</h2>
+
+    <table width="300px">
+        <tr>
+            <th>Id produs</th>
+            <th>Info produs</th>
+            <th>Intrari in gestiune principala</th>
+            <th>Retrageri din gestiunea principala</th>
+            <th>Intrari Drumul Taberei</th>
+            <th>Vanzari drumul taberei</th>
+            <th>Intrari Drumetu</th>
+            <th>Vanzari Drumetu</th>
+        </tr>
+        {% for prod in productsArray %}
+            <tr align="center">
+                <td>
+                    {{ prod.productId }}
+                </td>
+
+                <td>
+                    {{ prod.productCode }}
+                </td>
+
+                <td>
+                    {{ prod.entriesMainStorage }}
+                </td>
+
+                <td>
+                    {{ prod.withdrawMainStorage }}
+                </td>
+
+                <td>
+                    {{ prod.entriesDrumulTaberei }}
+                </td>
+
+                <td>
+                    {{ prod.salesDrumulTaberei }}
+                </td>
+
+                <td>
+                    {{ prod.entriesDrumetu }}
+                </td>
+
+                <td>
+                    {{ prod.salesDrumetu }}
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+suppliers:
+    pattern: /suppliers
+    defaults: { _controller: MinicoSilverBundle:Suppliers:index }
+suppliers_new:
+    pattern: /suppliers/new
+    defaults: { _controller: MinicoSilverBundle:Suppliers:new }
+suppliers_create:
+    pattern: /suppliers/create
+    defaults: { _controller: MinicoSilverBundle:Suppliers:create }
+suppliers_show:
+    pattern: /suppliers/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Suppliers:show }
+    requirements: { _method: get }
+suppliers_delete:
+    pattern: /suppliers/delete/{id}
+    defaults: { _controller: MinicoSilverBundle:Suppliers:delete }
+    requirements: { _method: delete }
+suppliers_edit:
+    pattern: /suppliers/edit/{id}
+    defaults: { _controller: MinicoSilverBundle:Suppliers:edit }
+    requirements: { _method: get }
+suppliers_update:
+    pattern: /suppliers/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Suppliers:update }
+    requirements: { _method: put }

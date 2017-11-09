@@ -1,0 +1,115 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Products</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nr crt</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Cod produs</th>
+                <td>{{ entity.productCode }}</td>
+            </tr>
+            <tr>
+                <th>Descriere produs</th>
+                <td>{{ entity.productDescription }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ entity.category }}</td>
+            </tr>
+            <tr>
+                <th>Pret intrare</th>
+                <td>{{ entity.entryPrice }}</td>
+            </tr>
+            <tr>
+                <th>Pret vanzare</th>
+                <td>{{ entity.salePrice }}</td>
+            </tr>
+            <tr>
+                <th>Furnizor</th>
+                <td>{{ entity.supplier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div align="center">
+        {{ form(entries_form) }}
+    </div>
+
+    {% if entriesShow %}
+        <h3 align="center">Intrari in gestiune:</h3>
+        <div align="center">
+            <table class="record_properties">
+                <tbody>
+                <tr>
+                    <th>Modify</th>
+                    <th>Qty</th>
+                    <th>Date</th>
+                    <th>Storage</th>
+                </tr>
+                {% for entrie in entries %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('entries_edit', { 'id': entrie.id }) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>{{ entrie.quantity }}</td>
+                        <td>{{ entrie.date |date('Y-m-d') }}</td>
+                        <td>{{ entrie.storage }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    {% if transfersShow %}
+        <h3 align="center">Transferuri:</h3>
+        <div align="center">
+            <table class="record_properties">
+                <tbody>
+                <tr>
+                    <th>Modify</th>
+                    <th>Qty</th>
+                    <th>fromStorage</th>
+                    <th>toStorage</th>
+                    <th>creationDate</th>
+                </tr>
+                {% for transfer in transfers %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('transfer_edit', { 'id': transfer.id }) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>{{ transfer.qty }}</td>
+                        <td>{{ transfer.fromStorage  }}</td>
+                        <td>{{ transfer.toStorage }}</td>
+                        <td>{{ transfer.creationDate | date('Y-m-d') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('products') }}">
+                Back to the list
+            </a>
+        </li>
+        <br/>
+        <li>
+            <a href="{{ path('products_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

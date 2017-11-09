@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block head %}
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {#{% block stylesheets %}#}
+            {#<link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/structure.css') }}" />#}
+            {#<link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/demos.css') }}" />#}
+        {#{% endblock %}#}
+        {% block stylesheets %}
+            {% stylesheets 'bundles/minicosilver/css/demos.css' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+
+        {% block javascript %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+{% endblock %}
+{% block body %}
+    {% block content_header %}
+        <div class="header clear-fix">
+            {% block content_header_more %}
+                <div style="float: left;" class="menu-div">
+                    <a href="{{ path('products') }}">Produse</a>&nbsp;
+                    <a href="{{ path('category') }}">Categorii de produse</a>&nbsp;
+                    <a href="{{ path('entries') }}">Intrari</a>&nbsp;
+                    <a href="{{ path('sales') }}">Vanzari</a>&nbsp;
+                    <a href="{{ path('storage') }}">Gestiuni</a>&nbsp;
+                    <a href="{{ path('transfer') }}">Bonuri de transfer</a>&nbsp;
+                    <a href="{{ path('suppliers') }}">Furnizori</a>&nbsp;
+                    <a href="{{ path('withdrawls') }}">Retrageri</a>&nbsp;
+                    {#<a href="{{ path('minico_silver_report') }}">Rapoarte</a>&nbsp;#}
+                    {#<a href="{{ path('sales_search_by_pn') }}">Cautare dupa cod produs</a>&nbsp;#}
+                    {#<a href="{{ path('add_new_entries') }}">Adauga noi produse</a>&nbsp;#}
+                </div>
+                <br/>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

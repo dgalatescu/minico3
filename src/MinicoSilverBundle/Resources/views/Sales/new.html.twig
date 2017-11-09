@@ -1,0 +1,59 @@
+{% extends 'MinicoSilverBundle:Sales:index.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Sales creation</h1>
+
+    {#{{ form(form) }}#}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.date) }}
+        {{ form_row(form.fromStorage) }}
+
+        {% if form.productId is defined %}
+            {#{{ form_row(form.productId) }}#}
+            <div>
+                {{ form_label(form.productId)  }}
+                {{ form_widget(form.productId) }}
+                {#{{ form_errors(form.productId) }}#}
+            </div>
+        {% endif %}
+
+        {% if form.quantity is defined %}
+            {#{{ form_row(form.quantity) }}#}
+            <div>
+                {{ form_label(form.quantity)  }}
+                {{ form_widget(form.quantity) }}
+                {{ form_errors(form.quantity) }}
+            </div>
+        {% endif %}
+        {{ form_row(form.submit, { 'label': 'Adauga vanzarea' }) }}
+    {{ form_end(form) }}
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('sales') }}">
+                    Back to the list
+                </a>
+            </li>
+        </ul>
+    <br/>
+    <table>
+        <tr>
+            <th>Id vanzare</th>
+            <th>Cod produs</th>
+            <th>Cantitate</th>
+            <th>Gestiune vanzare</th>
+            <th>Data vanzare</th>
+        </tr>
+        {% for sale in oldSales %}
+            <tr>
+                <td><a href="{{ path('sales_show', { 'id': sale.id }) }}">{{ sale.id }}</a></td>
+                <td>{{ sale.productId }}</td>
+                <td>{{ sale.quantity }}</td>
+                <td>{{ sale.fromStorage }}</td>
+                <td>{{ sale.date|date("Y-m-d") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

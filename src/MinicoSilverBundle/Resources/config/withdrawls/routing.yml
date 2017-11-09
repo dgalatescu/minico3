@@ -1,0 +1,25 @@
+withdrawls:
+    pattern: /withdrawls
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:index }
+withdrawls_new:
+    pattern: /withdrawls/new
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:new }
+withdrawls_create:
+    pattern: /withdrawls/create
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:create }
+withdrawls_show:
+    pattern: /withdrawls/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:show }
+    requirements: { _method: get }
+withdrawls_delete:
+    pattern: /withdrawls/delete/{id}
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:delete }
+    requirements: { _method: delete }
+withdrawls_edit:
+    pattern: /withdrawls/edit/{id}
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:edit }
+    requirements: { _method: get }
+withdrawls_update:
+    pattern: /withdrawls/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Withdrawls:update }
+    requirements: { _method: put }

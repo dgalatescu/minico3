@@ -1,0 +1,47 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.structure.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/demos.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery.ui.datepicker.css') }}">
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/customCombobox.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/jquery.dataTables.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/shCore.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/demo.css') }}">
+        <style type="text/css" class="init"></style>
+    {% endblock %}
+    {% block javascript %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.core.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.widget.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.datepicker.js') }}"></script>
+        <script>
+            $(function() {
+                $( "#minico_silverbundle_sales_date" )
+                    .datepicker({ dateFormat: 'yy-mm-dd' });
+                $( "#form_dateStart" )
+                    .datepicker({ dateFormat: 'yy-mm-dd' });
+                $( "#form_dateEnd" )
+                    .datepicker({ dateFormat: 'yy-mm-dd' });
+            });
+        </script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/customCombobox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/comboFunctions.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/jquery.dataTables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/shCore.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/demo.js') }}"></script>
+
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+{% endblock %}

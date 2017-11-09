@@ -1,0 +1,41 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/searchpn.js') }}"></script>
+{% endblock %}
+{% block body %}
+    <h1>Vanzari</h1>
+    <div id="form">
+        <p>Date: <input type="text" id="datepicker" value="{{ "now"|date("Y-m-d") }}"></p>
+        <br/>
+        <input type="text" id="productId" class="inputText" />
+        <button id="click" class="buttonClass" type="button">Actualizeaza</button>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <div id="result" style="float: left;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="result_2">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <ul class="record_actions">
+                    <li>
+                        <a href="{{ path('sales') }}">
+                            Back to the list
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+{% endblock %}

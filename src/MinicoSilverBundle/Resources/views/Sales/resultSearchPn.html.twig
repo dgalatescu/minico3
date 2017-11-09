@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        {% for productss in products %}
+        <td>
+            <div>
+                Cod: {{ productss.productCode }}<br/>
+                Imagine: <img src="{{ image_url_path }}/{{ productss.photo }}" alt="Imaginea lipseste"><br/>
+                Descriere: {{ productss.productDescription }}<br/>
+                Categorie: {{ productss.categName }}<br/>
+                Cantitate in stoc: {{ productss.sumEntries - productss.sumSales - productss.sumWithdrawls }}<br/>
+                Pret intrare: {{ productss.entryPrice }}<br/>
+                Pret vanzare: {{ productss.salePrice }}<br/>
+                Catitate vanduta: <input type="text" idProdus="{{ productss.id }}" class="sale" /><br/>
+                Catitate retrasa: <input type="text" idProdus="{{ productss.id }}" class="withdrawls" /><br/>
+                Catitate adaugata: <input type="text" idProdus="{{ productss.id }}" class="entries" /><br/>
+                <button save="saveInfoToDatabase" class="save" value="Save" idProdus="{{ productss.id }}">Save</button>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>

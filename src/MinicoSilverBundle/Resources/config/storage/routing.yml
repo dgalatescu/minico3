@@ -1,0 +1,25 @@
+#storage:
+#    pattern: /storage
+#    defaults: { _controller: MinicoSilverBundle:Storage:index }
+#storage_new:
+#    pattern: /storage/new
+#    defaults: { _controller: MinicoSilverBundle:Storage:new }
+#storage_create:
+#    pattern: /storage/create
+#    defaults: { _controller: MinicoSilverBundle:Storage:create }
+#storage_show:
+#    pattern: /storage/show/{id}
+#    defaults: { _controller: MinicoSilverBundle:Storage:show }
+#    requirements: { _method: get }
+#storage_delete:
+#    pattern: /storage/delete/{id}
+#    defaults: { _controller: MinicoSilverBundle:Storage:delete }
+#    requirements: { _method: delete }
+#storage_edit:
+#    pattern: /storage/edit/{id}
+#    defaults: { _controller: MinicoSilverBundle:Storage:edit }
+#    requirements: { _method: get }
+#storage_update:
+#    pattern: /storage/update/{id}
+#    defaults: { _controller: MinicoSilverBundle:Storage:update }
+#    requirements: { _method: put }

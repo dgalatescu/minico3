@@ -1,0 +1,25 @@
+parameters:
+    minico.silver.products_service: MinicoSilverBundle\Service\ProductsService
+    minico.silver.transfer_service: MinicoSilverBundle\Service\TransferService
+    minico.silver.storage_service: MinicoSilverBundle\Service\StorageService
+
+services:
+    minico.silver.products_service:
+        class: %minico.silver.products_service%
+        #        arguments: [@service_id, "plain_value", %parameter%]
+        arguments: ['@service_container']
+    minico.silver.transfer_service:
+        class: %minico.silver.transfer_service%
+        arguments: ['@service_container']
+    minico.silver.storage_service:
+        class: %minico.silver.storage_service%
+        arguments: ['@service_container']
+    sg_datatables.post:
+        class: MinicoSilverBundle\Datatables\PostDatatable
+        tags:
+            - { name: sg.datatable.view }
+    est.cache_invalidator:
+        class: MinicoSilverBundle\Service\CacheInvalidatorService
+        #lazy: true
+        calls:
+            - [setRouter, ['@router']]

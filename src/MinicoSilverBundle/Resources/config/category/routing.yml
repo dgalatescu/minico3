@@ -1,0 +1,33 @@
+category:
+    pattern: /category
+    defaults: { _controller: MinicoSilverBundle:Category:index }
+category_new:
+    pattern: /category/new
+    defaults: { _controller: MinicoSilverBundle:Category:new }
+category_create:
+    pattern: /category/create
+    defaults: { _controller: MinicoSilverBundle:Category:create }
+category_show:
+    pattern: /category/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Category:show }
+    requirements: { _method: get }
+category_delete:
+    pattern: /category/delete/{id}
+    defaults: { _controller: "MinicoSilverBundle:Category:delete", id: 0 }
+    requirements: { _method: delete }
+category_edit:
+    pattern: /category/edit/{id}
+    defaults: { _controller: "MinicoSilverBundle:Category:edit", id: 0 }
+    requirements: { _method: get }
+category_update:
+    pattern: /category/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Category:update }
+    requirements: { _method: put }
+#category_list:
+#    pattern: /category/list
+#    defaults: { _controller: MinicoSilverBundle:Category:list }
+#    options:
+#        expose: true
+ajax_title:
+    pattern: /category/ajax_titlte
+    defaults: { _controller: MinicoSilverBundle:Category:ajaxTitle }

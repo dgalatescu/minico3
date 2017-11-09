@@ -1,0 +1,36 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Transfer creation</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('transfer') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>Id vanzare</th>
+            <th>Cod produs</th>
+            <th>Cantitate</th>
+            <th>Transferat din gestiune</th>
+            <th>Transferat in gestiune</th>
+            <th>Data transfer</th>
+        </tr>
+        {% for transfer in oldTransfer %}
+            <tr>
+                <td><a href="{{ path('transfer_show', { 'id': transfer.id }) }}">{{ transfer.id }}</a></td>
+                <td>{{ transfer.product }}</td>
+                <td>{{ transfer.qty }}</td>
+                <td>{{ transfer.fromStorage }}</td>
+                <td>{{ transfer.toStorage }}</td>
+                <td>{{ transfer.creationDate|date("Y-m-d") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

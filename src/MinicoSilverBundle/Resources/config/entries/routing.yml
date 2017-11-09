@@ -1,0 +1,45 @@
+entries:
+    pattern: /entries
+    defaults: { _controller: MinicoSilverBundle:Entries:index }
+entries_new:
+    pattern: /entries/new
+    defaults: { _controller: MinicoSilverBundle:Entries:new }
+entries_create:
+    pattern: /entries/create
+    defaults: { _controller: MinicoSilverBundle:Entries:create }
+entries_show:
+    pattern: /entries/show/{id}
+    defaults: { _controller: MinicoSilverBundle:Entries:show }
+    requirements: { _method: get }
+entries_delete:
+    pattern: /entries/delete/{id}
+    defaults: { _controller: MinicoSilverBundle:Entries:delete }
+    requirements: { _method: delete }
+entries_edit:
+    pattern: /entries/edit/{id}
+    defaults: { _controller: MinicoSilverBundle:Entries:edit }
+    requirements: { _method: get }
+entries_update:
+    pattern: /entries/update/{id}
+    defaults: { _controller: MinicoSilverBundle:Entries:update }
+    requirements: { _method: put }
+add_new_entries:
+    pattern: /entries/add-new-entries
+    defaults: { _controller: MinicoSilverBundle:Entries:addNewEntries }
+    requirements: { _method: get }
+save_add_new_entries:
+    pattern: /entries/save-new-entries
+    defaults: { _controller: MinicoSilverBundle:Entries:saveNewEntries }
+    requirements: { _method: post }
+    options:
+        expose: true
+photo_test:
+    pattern: /entries/photo_test
+    defaults: { _controller: MinicoSilverBundle:Entries:photoTest }
+#    requirements: { _method: post }
+    options:
+        expose: true
+image_path:
+    pattern: /images
+    options:
+        expose: true

@@ -1,0 +1,26 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    {% include 'MinicoSilverBundle:Report:meniu.html.twig' %}
+    <br/>
+    {% if sumPerSupplier|length > 0 %}
+        <table width="300px">
+            <tr>
+                <th>Furnizor</th>
+                <th>Valoare stoc(fara TVA)</th>
+            </tr>
+            {% for supplier in sumPerSupplier %}
+                {% if supplier.value != 0 %}
+                    <tr align="center">
+                        <td>
+                            {{ supplier.name }}
+                        </td>
+                        <td>
+                            {{ supplier.value }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

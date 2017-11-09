@@ -1,0 +1,80 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/searchpn.js') }}"></script>
+{% endblock %}
+{% block body %}
+    <h1>Sales list</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('sales_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    <br/>
+    {{ form(form) }}
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Furnizor</th>
+            <th>Total intrare (fara TVA)</th>
+            <th>Total vanzare</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for supplier in supplierValues %}
+            <tr>
+                <td>{{ supplier.SupplierName }}</td>
+                <td>{{ supplier.oweTotal }}</td>
+                <td>{{ supplier.saleTotal }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Magazin vanzare</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('sales_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.productId }}</td>
+                <td>{{ entity.quantity }}</td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.fromStorage }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('sales_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('sales_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sales_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

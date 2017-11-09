@@ -1,0 +1,15 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Suppliers creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('suppliers') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

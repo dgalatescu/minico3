@@ -1,0 +1,41 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}{{  parent() }}
+    <h1>Withdrawls</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ entity.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Storage from </th>
+                <td>{{ entity.storage }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('withdrawls') }}">
+            Back to the list
+        </a>
+    </li>
+    <br/>
+    <li>
+        <a href="{{ path('withdrawls_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
